@@ -1,27 +1,26 @@
 #include <iostream>
+#include <sstream>
 #include <string>
-#include <cctype>
+#include <vector>
 using namespace std;
 
 int main() {
-    string s;
-    int vowels = 0, consonants = 0;
-
+    string s, word;
     cout << "Enter a sentence: ";
     getline(cin, s);
 
-    for (char ch : s) {
-        ch = tolower(static_cast<unsigned char>(ch));
-        if (ch >= 'a' && ch <= 'z') {
-            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
-                vowels++;
-            } else {
-                consonants++;
-            }
-        }
+    stringstream ss(s);
+    vector<string> words;
+
+    while (ss >> word) {
+        words.push_back(word);
     }
 
-    cout << "Number of vowels: " << vowels << endl;
-    cout << "Number of consonants: " << consonants << endl;
+    cout << "Reversed sentence: ";
+    for (int i = static_cast<int>(words.size()) - 1; i >= 0; i--) {
+        cout << words[i] << (i > 0 ? " " : "");
+    }
+    cout << endl;
+
     return 0;
 }
